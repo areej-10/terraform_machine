@@ -23,16 +23,13 @@ module "myapp-subnet" {
 module "myapp-webserver" {
   source = "./modules/webserver"
   env_prefix = var.env_prefix
-  instance_type = var. instance_type
+  instance_type = var.instance_type
   availability_zone = var.availability_zone
   public_key = var.public_key
   my_ip = local.my_ip
   vpc_id = aws_vpc.myapp_vpc.id
   subnet_id = module.myapp-subnet.subnet.id
   
-  # Loop count
-  count             = 2
-  # Use count.index to differentiate instances
+  count             = 1
   instance_suffix   = count.index
-
 }
